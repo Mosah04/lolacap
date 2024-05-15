@@ -148,7 +148,7 @@ def run():
       subtitle_language='fon'
     )
 
-run()
+# run()
 
 # !wget https://github.com/rsms/inter/releases/download/v4.0/Inter-4.0.zip
 # !unzip Inter-4.0.zip -d Inter
@@ -160,9 +160,9 @@ run()
 
 # from moviepy.video.tools.subtitles import SubtitlesClip
 # from moviepy.video.io.VideoFileClip import VideoFileClip
-generator = lambda text: TextClip(text, font='Inter-Regular',
-                                  fontsize=24, color='white')
-subtitles = SubtitlesClip("sub-input.fon.srt", generator)
-clip = VideoFileClip("input.mp4")
-final = CompositeVideoClip([clip, subtitles])
-final.write_videofile("final.mp4", fps=clip.fps)
+# generator = lambda text: TextClip(text, font='Inter-Regular',
+#                                   fontsize=24, color='white')
+# subtitles = SubtitlesClip("sub-input.fon.srt", generator)
+# clip = VideoFileClip("input.mp4")
+# final = CompositeVideoClip([clip, subtitles])
+# final.write_videofile("final.mp4", fps=clip.fps)

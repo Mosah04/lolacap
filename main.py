@@ -1,5 +1,18 @@
 import streamlit as st
 import add_subtitle_to_videos as doSub
+import subprocess
+from moviepy import change_settings
+
+command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
+subprocess.run(command, shell=True)
+
+change_settings({"IMAGEMAGICK_BINARY": r"/usr/bin/convert"})
+
+command = "sudo cp -r Inter /usr/share/fonts/truetype/"
+subprocess.run(command, shell=True)
+
+command = "sudo fc-cache -f -v"
+subprocess.run(command, shell=True)
 
 st.markdown("<h1 style='text-align:center;' >LOLACAP</h1>", unsafe_allow_html=True)
 st.markdown("""<style>
