@@ -123,7 +123,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         clip = VideoFileClip("input.mp4")
         final = CompositeVideoClip([clip, subtitles])
         final.write_videofile("final.mp4", fps=clip.fps)
-    else:
+    # else:
         # stream = ffmpeg.output(video_input_stream, output_video,
         #                        vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
         # ffmpeg.run(stream, overwrite_output=True)
