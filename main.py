@@ -3,7 +3,7 @@ import add_subtitle_to_videos as doSub
 import subprocess
 from moviepy.config import change_settings
 
-command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
+command = "sudo cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
 subprocess.run(command, shell=True)
 
 change_settings({"IMAGEMAGICK_BINARY": r"/usr/bin/convert"})
