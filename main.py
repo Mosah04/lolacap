@@ -90,7 +90,7 @@ if video_uploaded:
     doSub.input_video=video_uploaded.name
     with open("input.mp4", "wb") as f:
         f.write(video_uploaded.getbuffer())
-    command = "ls ."
+    command = "ls /mount/src/lolacap/"
     subprocess.run(command, shell=True)
 
 
