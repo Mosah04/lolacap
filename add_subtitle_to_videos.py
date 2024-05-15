@@ -33,7 +33,7 @@ def download_youtube(url : str):
     video = yt.streams.filter(res="720p").first()
     # Download the video
     video.download(filename="input.mp4")
-    return "https://lolacap.streamlit.app/" + input_video
+    return bytearray(input_video)
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
