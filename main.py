@@ -24,7 +24,7 @@ st.markdown("""<style>
 st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
 
 def onURLChange():
-    placeholder.video(doSub.download_youtube(st.session_state.youtube_url));
+    placeholder.video(st.session_state.youtube_url);
 
 with st.container( border=True):
     inputP, outputP = st.columns(2)
