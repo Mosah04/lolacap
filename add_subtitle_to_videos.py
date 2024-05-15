@@ -109,7 +109,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
 
     video_input_stream = ffmpeg.input(input_video)
     subtitle_input_stream = ffmpeg.input(subtitle_file)
-    output_video = f"output-{input_video_name}.mp4"
+    output_video = f"final.mp4"
     subtitle_track_title = subtitle_file.replace(".srt", "")
 
     if soft_subtitle:
@@ -156,6 +156,10 @@ def run(output_lang, hardcoded):
       subtitle_file=subtitle_file_fon,
       subtitle_language=output_lang
     )
+    with open(input_video, "rb") as f:
+        donnees_binaires = f.read()
+    IO_donnees_binaires = BytesIO(donnees_binaires)
+    return IO_donnees_binaires
 
 # run()
 
