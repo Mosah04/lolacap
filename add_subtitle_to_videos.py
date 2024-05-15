@@ -121,7 +121,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         ffmpeg.run(stream, overwrite_output=True)
 
     else:
-        generator = lambda text: TextClip(text, font='Inter-Regular',
+        generator = lambda text: TextClip(text, font='Inter',
                                   fontsize=24, color='white')
         subtitles = SubtitlesClip("sub-input.fon.srt", generator)
         clip = VideoFileClip("input.mp4")

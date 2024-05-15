@@ -8,7 +8,7 @@ subprocess.run(command, shell=True)
 
 change_settings({"IMAGEMAGICK_BINARY": r"/usr/bin/convert"})
 
-command = "cp -r Inter /usr/share/fonts/truetype/"
+command = "cp -r interFont /usr/share/fonts/truetype/"
 subprocess.run(command, shell=True)
 
 command = "fc-cache -f -v"
