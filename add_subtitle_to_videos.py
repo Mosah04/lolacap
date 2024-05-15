@@ -37,6 +37,7 @@ def download_youtube(url : str):
         donnees_binaires = f.read()
     IO_donnees_binaires = BytesIO(donnees_binaires)
     return IO_donnees_binaires
+    
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
@@ -119,7 +120,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         )
         ffmpeg.run(stream, overwrite_output=True)
 
-    if not soft_subtitle:
+    else:
         generator = lambda text: TextClip(text, font='Inter-Regular',
                                   fontsize=24, color='white')
         subtitles = SubtitlesClip("sub-input.fon.srt", generator)
@@ -131,7 +132,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         #                        vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
         # ffmpeg.run(stream, overwrite_output=True)
 
-def run():
+def run(output_lang, hardcoded):
 
     extracted_audio = extract_audio()
     language, segments = transcribe(extracted_audio)
@@ -142,18 +143,18 @@ def run():
 
     segments_texts = [segment.text for segment in segments]
     all_texts = "\r\n".join(segments_texts)
-    segments_texts_fon = translate(all_texts, language, 'fon')
+    segments_texts_fon = translate(all_texts, language, output_lang)
 
     subtitle_file_fon = generate_subtitle_file(
-    language='fon',
+    language=output_lang,
     segments=segments,
     translated_texts=segments_texts_fon
     )
 
     add_subtitle_to_video(
-      soft_subtitle=False,
+      soft_subtitle=hardcoded,
       subtitle_file=subtitle_file_fon,
-      subtitle_language='fon'
+      subtitle_language=output_lang
     )
 
 # run()

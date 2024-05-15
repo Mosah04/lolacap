@@ -23,10 +23,20 @@ st.markdown("""<style>
 
 st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
 
+
 def onURLChange():
     print('AAAA, ', st.session_state.youtube_url)
     doSub.download_youtube(st.session_state.youtube_url);
     placeholder.video(st.session_state.youtube_url);
+
+def doRun():
+    output_lang =""
+    if st.session_state.output_lang_select == "Yoruba":
+        output_lang = "yo"
+    else:
+        output_lang = "fon"
+    hardcoded = st.session_state.output_lang_select == "Hardcoded"
+    doSub.run(output_lang, hardcoded)
 
 with st.container( border=True):
     inputP, outputP = st.columns(2)
@@ -45,8 +55,8 @@ with st.container( border=True):
         # col2.button('Ok')
         col3, col4 = st.columns([2, 1])
         col3.text("Choose output language: ")
-        col4.selectbox("", ('Fon', 'Yorouba'))
-        st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"))
+        col4.selectbox("", ('Fon', 'Yoruba'), key="output_lang_select")
+        st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"), key="hard_radio")
         st.markdown("""
                     <style>
                     .st-af.st-ek.st-el.st-em.st-en.st-eo.st-ep{
@@ -55,7 +65,7 @@ with st.container( border=True):
                     </style>
                     """, unsafe_allow_html=True)
         placeholder = st.empty()
-        st.button('Add subtitles to videos')
+        add_sub_button = st.button('Add subtitles to videos', on_click=doRun)
     with outputP:
         output_placeholder = st.empty()
         output_placeholder.markdown("""
@@ -75,7 +85,8 @@ with st.container( border=True):
 
 if video_uploaded:
     placeholder.video(video_uploaded)
-
+    with open("input.mp4", "wb") as f:
+        f.write(video_uploaded.getbuffer())
 
 
 
