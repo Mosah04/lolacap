@@ -11,7 +11,7 @@ from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 from moviepy.video.tools.subtitles import SubtitlesClip
 # from moviepy.config import change_settings
 from faster_whisper import WhisperModel
-
+from io import BytesIO
 # command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
 # subprocess.run(command, shell=True)
 
@@ -33,10 +33,10 @@ def download_youtube(url : str):
     video = yt.streams.filter(res="720p").first()
     # Download the video
     video.download(filename="input.mp4")
-    with open("chemin/vers/votre/fichier.mp4", "rb") as f:
+    with open(input_video, "rb") as f:
         donnees_binaires = f.read()
-    # io.BytesIO(donnees_binaires)
-    return donnees_binaires
+    IO_donnees_binaires = BytesIO(donnees_binaires)
+    return IO_donnees_binaires
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
