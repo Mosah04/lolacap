@@ -9,19 +9,19 @@ import http.client
 from moviepy.editor import *
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 from moviepy.video.tools.subtitles import SubtitlesClip
-from moviepy.config import change_settings
+# from moviepy.config import change_settings
 from faster_whisper import WhisperModel
 
-command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
-subprocess.run(command, shell=True)
+# command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
+# subprocess.run(command, shell=True)
 
-change_settings({"IMAGEMAGICK_BINARY": r"/usr/bin/convert"})
+# change_settings({"IMAGEMAGICK_BINARY": r"/usr/bin/convert"})
 
-command = "sudo cp -r Inter /usr/share/fonts/truetype/"
-subprocess.run(command, shell=True)
+# command = "sudo cp -r Inter /usr/share/fonts/truetype/"
+# subprocess.run(command, shell=True)
 
-command = "sudo fc-cache -f -v"
-subprocess.run(command, shell=True)
+# command = "sudo fc-cache -f -v"
+# subprocess.run(command, shell=True)
 
 input_video = "input.mp4"
 input_video_name= ""
@@ -33,7 +33,7 @@ def download_youtube(url : str):
     video = yt.streams.filter(res="720p").first()
     # Download the video
     video.download(filename="input.mp4")
-
+    return "https://lolacap.streamlit.app" + input_video
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
@@ -116,12 +116,17 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         )
         ffmpeg.run(stream, overwrite_output=True)
 
-    if soft_subtitle:
-        ...
+    if not soft_subtitle:
+        generator = lambda text: TextClip(text, font='Inter-Regular',
+                                  fontsize=24, color='white')
+        subtitles = SubtitlesClip("sub-input.fon.srt", generator)
+        clip = VideoFileClip("input.mp4")
+        final = CompositeVideoClip([clip, subtitles])
+        final.write_videofile("final.mp4", fps=clip.fps)
     else:
-        stream = ffmpeg.output(video_input_stream, output_video,
-                               vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
-        ffmpeg.run(stream, overwrite_output=True)
+        # stream = ffmpeg.output(video_input_stream, output_video,
+        #                        vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
+        # ffmpeg.run(stream, overwrite_output=True)
 
 def run():
 
@@ -160,9 +165,3 @@ def run():
 
 # from moviepy.video.tools.subtitles import SubtitlesClip
 # from moviepy.video.io.VideoFileClip import VideoFileClip
-# generator = lambda text: TextClip(text, font='Inter-Regular',
-#                                   fontsize=24, color='white')
-# subtitles = SubtitlesClip("sub-input.fon.srt", generator)
-# clip = VideoFileClip("input.mp4")
-# final = CompositeVideoClip([clip, subtitles])
-# final.write_videofile("final.mp4", fps=clip.fps)
