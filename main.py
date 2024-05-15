@@ -27,6 +27,7 @@ def onURLChange():
     print('AAAA, ', st.session_state.youtube_url)
     doSub.download_youtube(st.session_state.youtube_url);
     placeholder.video(st.session_state.youtube_url);
+    placeholder.text(f"YES{st.session_state.youtube.url}")
 
 with st.container( border=True):
     inputP, outputP = st.columns(2)
