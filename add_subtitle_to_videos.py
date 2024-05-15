@@ -24,7 +24,9 @@ command = "sudo fc-cache -f -v"
 subprocess.run(command, shell=True)
 
 input_video = "input.mp4"
+input_video_name= ""
 def download_youtube(url : str):
+    global input_video_name
     input_video_name = input_video.replace(".mp4", "")
     yt = pytube.YouTube(url)
     # Filter and get the highest resolution video
