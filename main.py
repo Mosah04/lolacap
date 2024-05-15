@@ -39,7 +39,7 @@ with st.container( border=True):
                     </style>
                     """, unsafe_allow_html=True)
         with col1:
-            st.text_input("Video URL", placeholder="Paste a Youtube URL", key="youtube_url", onChange=onURLChange)
+            st.text_input("Video URL", placeholder="Paste a Youtube URL", key="youtube_url", on_change=onURLChange)
         col2.button('Ok')
         col3, col4 = st.columns([2, 1])
         col3.text("Choose output language: ")
