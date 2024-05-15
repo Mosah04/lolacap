@@ -33,7 +33,10 @@ def download_youtube(url : str):
     video = yt.streams.filter(res="720p").first()
     # Download the video
     video.download(filename="input.mp4")
-    return bytearray(input_video)
+    with open("chemin/vers/votre/fichier.mp4", "rb") as f:
+        donnees_binaires = f.read()
+    # io.BytesIO(donnees_binaires)
+    return donnees_binaires
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
