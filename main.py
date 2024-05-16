@@ -86,7 +86,12 @@ if st.session_state.youtube_url:
         doSub.download_youtube(st.session_state.youtube_url);
         placeholder.video(st.session_state.youtube_url);
     except pytube.exceptions.VideoUnavailable:
-        st.error('This Youtube video is not accessinle for download!', icon="🚨")
+        placeholder.markdown("""
+                             <p style="color: red; font-weight:bold; text-align: center;"  >
+                                This Youtube video is not accessible for download, you can chosse another one!
+                             </p>
+                             """, unsafe_allow_html=True)
+        st.error('This Youtube video is not accessible for download!', icon="🚨")
 
 if st.session_state.add_sub:
     def doRun():
