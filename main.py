@@ -92,6 +92,7 @@ if st.session_state.add_sub:
         hardcoded = st.session_state.output_lang_select == "Hardcoded"
         video = doSub.run(output_lang, hardcoded)
         output_placeholder.video(video)
+        output_placeholder.download_button('Download subtitled video', video, file_name="LolacapSub")
     doRun()
     
 # video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=onVideoChange)
