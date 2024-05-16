@@ -131,7 +131,7 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
 
         ffmpeg.run(stream, overwrite_output=True)
 
-def run(output_lang, hardcoded):
+def run(output_lang, softcoded):
 
     extracted_audio = extract_audio()
     language, segments = transcribe(extracted_audio)
@@ -151,7 +151,7 @@ def run(output_lang, hardcoded):
     )
 
     add_subtitle_to_video(
-      soft_subtitle=hardcoded,
+      soft_subtitle=softcoded,
       subtitle_file=subtitle_file_fon,
       subtitle_language=output_lang
     )
