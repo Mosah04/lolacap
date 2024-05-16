@@ -21,8 +21,12 @@ st.markdown("""<style>
             }
             </style>""", unsafe_allow_html=True)
 
-st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
-
+st.write("Dive into any video with ease using Lolacap - the app that brings local language to life, one subtitle at a time!")
+st.markdown("""<style>
+            div.st-emotion-cache-ul70r3.e1nzilvr5 p{
+                text-align:center;
+            }
+            </style>""", unsafe_allow_html=True)
 
 
 with st.container( border=True):
