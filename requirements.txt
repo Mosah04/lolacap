@@ -1,5 +1,4 @@
 faster-whisper
-ffmpeg 
 ffmpeg-python 
 pytube 
 moviepy

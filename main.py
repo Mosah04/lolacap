@@ -38,7 +38,7 @@ def doRun():
     hardcoded = st.session_state.output_lang_select == "Hardcoded"
     video = doSub.run(output_lang, hardcoded)
     with outputP:
-        st.video(video)
+        output_placeholder.video(video)
 
 with st.container( border=True):
     inputP, outputP = st.columns(2)
