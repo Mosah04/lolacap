@@ -24,16 +24,6 @@ st.markdown("""<style>
 st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
 
 
-def doRun():
-    output_lang =""
-    if st.session_state.output_lang_select == "Yoruba":
-        output_lang = "yo"
-    else:
-        output_lang = "fon"
-    hardcoded = st.session_state.output_lang_select == "Hardcoded"
-    video = doSub.run(output_lang, hardcoded)
-    with outputP:
-        output_placeholder.video(video)
 
 with st.container( border=True):
     inputP, outputP = st.columns(2)
@@ -62,7 +52,7 @@ with st.container( border=True):
                     </style>
                     """, unsafe_allow_html=True)
         placeholder = st.empty()
-        add_sub_button = st.button('Add subtitles to videos', on_click=doRun)
+        add_sub_button = st.button('Add subtitles to videos', key="add_sub")
     with outputP:
         output_placeholder = st.empty()
         output_placeholder.markdown("""
@@ -92,6 +82,18 @@ if st.session_state.youtube_url:
         placeholder.video(st.session_state.youtube_url);
         doSub.download_youtube(st.session_state.youtube_url);
 
+if st.session_state.add_sub:
+    def doRun():
+        output_lang =""
+        if st.session_state.output_lang_select == "Yoruba":
+            output_lang = "yo"
+        else:
+            output_lang = "fon"
+        hardcoded = st.session_state.output_lang_select == "Hardcoded"
+        video = doSub.run(output_lang, hardcoded)
+        output_placeholder.video(video)
+    doRun()
+    
 # video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=onVideoChange)
 # if video_uploaded:
 #      st.video(video_uploaded)
