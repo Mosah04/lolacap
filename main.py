@@ -46,7 +46,7 @@ with st.container( border=True):
         st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"), key="hard_radio")
         st.markdown("""
                     <style>
-                    .st-af.st-ek.st-el.st-em.st-en.st-eo.st-ep{
+                    div.st-as.st-d4.st-d5.st-d6.st-d7.st-d8.st-d9{
                         flex-direction: row;
                     }
                     </style>
