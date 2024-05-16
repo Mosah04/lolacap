@@ -37,16 +37,16 @@ with st.container( border=True):
         st.markdown("""
                     <style>
                     .st-emotion-cache-ocqkz7.e1f1d6gn5{
-                        align-items: flex-end;
+                        align-items: center;
+                        text-align: center;
                     }
                     </style>
                     """, unsafe_allow_html=True)
         # with col1:
         youtube_url = st.text_input("Youtube video URL", placeholder="Paste a Youtube URL", key="youtube_url")
         # col2.button('Ok')
-        col3, col4 = st.columns([2, 1])
-        col3.text("Choose output language: ")
-        col4.selectbox("", ('Fon', 'Yoruba'), key="output_lang_select")
+        st.text("Choose output language: ")
+        st.selectbox("", ('Fon', 'Yoruba'), key="output_lang_select")
         st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"), key="hard_radio")
         st.markdown("""
                     <style>
