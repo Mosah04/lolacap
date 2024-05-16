@@ -45,8 +45,7 @@ with st.container( border=True):
         # with col1:
         youtube_url = st.text_input("Youtube video URL", placeholder="Paste a Youtube URL", key="youtube_url")
         # col2.button('Ok')
-        st.text("Choose output language: ")
-        st.selectbox("", ('Fon', 'Yoruba'), key="output_lang_select")
+        st.selectbox("Choose output language:", ('Fon', 'Yoruba'), key="output_lang_select")
         st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"), key="hard_radio")
         st.markdown("""
                     <style>
