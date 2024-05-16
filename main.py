@@ -74,45 +74,45 @@ with st.container( border=True):
                     """, unsafe_allow_html=True)
         output_placeholder.caption("Here will be displayed your subtitled video")
 
-try:
-    if video_uploaded:
-        placeholder.video(video_uploaded)
-        with open("input.mp4", "wb") as f:
-            f.write(video_uploaded.getbuffer())
-        command = "ls /mount/src/lolacap/"
-        subprocess.run(command, shell=True)
+# try:
+if video_uploaded:
+    placeholder.video(video_uploaded)
+    with open("input.mp4", "wb") as f:
+        f.write(video_uploaded.getbuffer())
+    command = "ls /mount/src/lolacap/"
+    subprocess.run(command, shell=True)
 
-    if st.session_state.youtube_url: 
-        try:
-            doSub.download_youtube(st.session_state.youtube_url);
-            placeholder.video(st.session_state.youtube_url);
-        except pytube.exceptions.VideoUnavailable:
-            placeholder.markdown("""
-                                <p style="color: red; font-weight:bold; text-align: center;"  >
-                                    This Youtube video is not accessible for download, you can choose another one!
-                                </p>
-                                """, unsafe_allow_html=True)
-            st.error('This Youtube video is not accessible for download!', icon="🚨")
+if st.session_state.youtube_url: 
+    try:
+        doSub.download_youtube(st.session_state.youtube_url);
+        placeholder.video(st.session_state.youtube_url);
+    except pytube.exceptions.VideoUnavailable:
+        placeholder.markdown("""
+                            <p style="color: red; font-weight:bold; text-align: center;"  >
+                                This Youtube video is not accessible for download, you can choose another one!
+                            </p>
+                            """, unsafe_allow_html=True)
+        st.error('This Youtube video is not accessible for download!', icon="🚨")
 
-    if st.session_state.add_sub:
-        def doRun():
-            output_lang =""
-            if st.session_state.output_lang_select == "Yoruba":
-                output_lang = "yo"
-            else:
-                output_lang = "fon"
-            softcoded = st.session_state.hard_radio == "Softcoded"
-            video = doSub.run(output_lang, softcoded)
-            out_container = output_placeholder.container()
-            with out_container:
-                st.video(video)
-                st.download_button('Download subtitled video', video, file_name="LolacapSub.mp4", key="download_button")
-        doRun()
-    if st.session_state.download_button:
-        st.session_state.download_button = False
+if st.session_state.add_sub:
+    def doRun():
+        output_lang =""
+        if st.session_state.output_lang_select == "Yoruba":
+            output_lang = "yo"
+        else:
+            output_lang = "fon"
+        softcoded = st.session_state.hard_radio == "Softcoded"
+        video = doSub.run(output_lang, softcoded)
+        out_container = output_placeholder.container()
+        with out_container:
+            st.video(video)
+            st.download_button('Download subtitled video', video, file_name="LolacapSub.mp4", key="download_button")
+    doRun()
+if st.session_state.download_button:
+    st.session_state.download_button = False
         
-except Exception as e:
-    st.error("Ouch! Sorry, something went wrong, try again!", icon="🚨")
+# except Exception as e:
+#     st.error("Ouch! Sorry, something went wrong, try again!", icon="🚨")
     
 # video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=onVideoChange)
 # if video_uploaded:
