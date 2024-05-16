@@ -25,9 +25,10 @@ st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
 
 
 def onURLChange():
-    print('AAAA, ', st.session_state.youtube_url)
-    doSub.download_youtube(st.session_state.youtube_url);
-    placeholder.video(st.session_state.youtube_url);
+    if st.session_state.youtube_url: 
+        print('AAAA, ', st.session_state.youtube_url)
+        doSub.download_youtube(st.session_state.youtube_url);
+        placeholder.video(st.session_state.youtube_url);
 
 def doRun():
     output_lang =""
