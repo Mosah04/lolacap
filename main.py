@@ -107,9 +107,9 @@ if st.session_state.add_sub:
         with out_container:
             st.video(video)
             st.download_button('Download subtitled video', video, file_name="LolacapSub.mp4", key="download_button")
+            if st.session_state.download_button:
+                st.session_state.download_button = False
     doRun()
-if st.session_state.download_button:
-    st.session_state.download_button = False
         
 # except Exception as e:
 #     st.error("Ouch! Sorry, something went wrong, try again!", icon="🚨")
