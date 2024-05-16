@@ -46,7 +46,7 @@ with st.container( border=True):
         st.radio("Hardcoded or not?:", ("Hardcoded", "Softcoded"), key="hard_radio")
         st.markdown("""
                     <style>
-                    div.st-as.st-d4.st-d5.st-d6.st-d7.st-d8.st-d9{
+                    div[role=radiogroup]{
                         flex-direction: row;
                     }
                     </style>
