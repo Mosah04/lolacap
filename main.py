@@ -1,6 +1,7 @@
 import streamlit as st
 import add_subtitle_to_videos as doSub
 import subprocess
+import pytube
 # from moviepy.config import change_settings
 
 # command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
@@ -81,11 +82,11 @@ if video_uploaded:
     subprocess.run(command, shell=True)
 
 if st.session_state.youtube_url: 
-    # try:
+    try:
         doSub.download_youtube(st.session_state.youtube_url);
         placeholder.video(st.session_state.youtube_url);
-    # except :
-    #     placeholder.write()
+    except pytube.exceptions.VideoUnavailable:
+        st.error('This Youtube video is not accessinle for download!', icon="🚨")
 
 if st.session_state.add_sub:
     def doRun():
