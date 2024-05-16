@@ -38,7 +38,7 @@ with st.container( border=True):
                     </style>
                     """, unsafe_allow_html=True)
         # with col1:
-        youtube_url = st.text_input("Video URL", placeholder="Paste a Youtube URL", key="youtube_url")
+        youtube_url = st.text_input("Youtube video URL", placeholder="Paste a Youtube URL", key="youtube_url")
         # col2.button('Ok')
         col3, col4 = st.columns([2, 1])
         col3.text("Choose output language: ")
@@ -79,8 +79,8 @@ if video_uploaded:
 
 if st.session_state.youtube_url: 
         print('AAAA, ', st.session_state.youtube_url)
-        placeholder.video(st.session_state.youtube_url);
         doSub.download_youtube(st.session_state.youtube_url);
+        placeholder.video(st.session_state.youtube_url);
 
 if st.session_state.add_sub:
     def doRun():
