@@ -24,6 +24,7 @@ from io import BytesIO
 # subprocess.run(command, shell=True)
 
 input_video = "input.mp4"
+output_video = ""
 input_video_name= ""
 def download_youtube(url : str):
     global input_video_name
@@ -107,9 +108,10 @@ def translate(input_phrase, source_lang, target_lang):
 
 def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
 
+    global output_video
     video_input_stream = ffmpeg.input(input_video)
     subtitle_input_stream = ffmpeg.input(subtitle_file)
-    output_video = f"final.mp4"
+    output_video = f"output-{input_video_name}.mp4"
     subtitle_track_title = subtitle_file.replace(".srt", "")
 
     if soft_subtitle:
@@ -120,17 +122,14 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file,  subtitle_language):
         )
         ffmpeg.run(stream, overwrite_output=True)
 
+    if soft_subtitle:
+        ...
     else:
-        generator = lambda text: TextClip(text, font='Inter',
-                                  fontsize=24, color='white')
-        subtitles = SubtitlesClip("sub-input.fon.srt", generator)
-        clip = VideoFileClip("input.mp4")
-        final = CompositeVideoClip([clip, subtitles])
-        final.write_videofile("final.mp4", fps=clip.fps)
-    # else:
-        # stream = ffmpeg.output(video_input_stream, output_video,
-        #                        vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
-        # ffmpeg.run(stream, overwrite_output=True)
+        stream = ffmpeg.output(video_input_stream, output_video,
+                               vf=f"subtitles={subtitle_file}:force_style='Fontname=Trebuchet MS'")
+                               #  vf=f"subtitles={subtitle_file}")
+
+        ffmpeg.run(stream, overwrite_output=True)
 
 def run(output_lang, hardcoded):
 
