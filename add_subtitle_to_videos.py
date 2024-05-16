@@ -155,7 +155,7 @@ def run(output_lang, hardcoded):
       subtitle_file=subtitle_file_fon,
       subtitle_language=output_lang
     )
-    with open(input_video, "rb") as f:
+    with open(output_video, "rb") as f:
         donnees_binaires = f.read()
     IO_donnees_binaires = BytesIO(donnees_binaires)
     return IO_donnees_binaires
