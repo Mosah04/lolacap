@@ -1,7 +1,7 @@
 import streamlit as st
 import add_subtitle_to_videos as doSub
 import subprocess
-from moviepy.config import change_settings
+# from moviepy.config import change_settings
 
 # command = "cat /etc/ImageMagick-6/policy.xml | sed 's/none/read,write/g' > /etc/ImageMagick-6/policy.xml"
 # subprocess.run(command, shell=True)
@@ -71,7 +71,7 @@ with st.container( border=True):
                     }
                     </style>
                     """, unsafe_allow_html=True)
-        output_placeholder.caption("Here will be displayed your subtitle video")
+        output_placeholder.caption("Here will be displayed your subtitled video")
 
 if video_uploaded:
     placeholder.video(video_uploaded)
@@ -81,9 +81,11 @@ if video_uploaded:
     subprocess.run(command, shell=True)
 
 if st.session_state.youtube_url: 
-        print('AAAA, ', st.session_state.youtube_url)
+    # try:
         doSub.download_youtube(st.session_state.youtube_url);
         placeholder.video(st.session_state.youtube_url);
+    # except :
+    #     placeholder.write()
 
 if st.session_state.add_sub:
     def doRun():
