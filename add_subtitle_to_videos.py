@@ -93,7 +93,7 @@ def generate_subtitle_file(language, segments, translated_texts=None):
 
 def translate(input_phrase, source_lang, target_lang):
     conn = http.client.HTTPSConnection("translator-api.glosbe.com")
-    payload = input_phrase
+    payload = input_phrase.encode('utf-8')
     headers = {'Content-Type': 'text/plain'}
     try:
         conn.request("POST", f"/translateByLangDetect?sourceLang={source_lang}&targetLang={target_lang}", payload, headers)
