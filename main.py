@@ -89,7 +89,7 @@ if st.session_state.add_sub:
             output_lang = "yo"
         else:
             output_lang = "fon"
-        hardcoded = st.session_state.output_lang_select == "Hardcoded"
+        hardcoded = st.session_state.hard_radio == "Hardcoded"
         video = doSub.run(output_lang, hardcoded)
         out_container = output_placeholder.container()
         with out_container:
