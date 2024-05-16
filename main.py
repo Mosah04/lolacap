@@ -111,7 +111,7 @@ try:
     if st.session_state.download_button:
         st.session_state.download_button = False
         
-except:
+except Exception as e:
     st.error("Ouch! Sorry, something went wrong, try again!", icon="🚨")
     
 # video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=onVideoChange)
