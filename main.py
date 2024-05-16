@@ -24,12 +24,6 @@ st.markdown("""<style>
 st.write("MP4, MOV, M4A, AVI for video Maximum 200Mo")
 
 
-def onURLChange():
-    if st.session_state.youtube_url: 
-        print('AAAA, ', st.session_state.youtube_url)
-        placeholder.video(st.session_state.youtube_url);
-        doSub.download_youtube(st.session_state.youtube_url);
-
 def doRun():
     output_lang =""
     if st.session_state.output_lang_select == "Yoruba":
@@ -41,18 +35,10 @@ def doRun():
     with outputP:
         output_placeholder.video(video)
 
-def on_video_upload():
-    if video_uploaded:
-        placeholder.video(video_uploaded)
-        with open("input.mp4", "wb") as f:
-            f.write(video_uploaded.getbuffer())
-        command = "ls /mount/src/lolacap/"
-        subprocess.run(command, shell=True)
-
 with st.container( border=True):
     inputP, outputP = st.columns(2)
     with inputP:
-        video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=on_video_upload)
+        video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video")
         # col1, col2 = st.columns([5, 1])
         st.markdown("""
                     <style>
@@ -62,7 +48,7 @@ with st.container( border=True):
                     </style>
                     """, unsafe_allow_html=True)
         # with col1:
-        st.text_input("Video URL", placeholder="Paste a Youtube URL", key="youtube_url", on_change=onURLChange)
+        youtube_url = st.text_input("Video URL", placeholder="Paste a Youtube URL", key="youtube_url")
         # col2.button('Ok')
         col3, col4 = st.columns([2, 1])
         col3.text("Choose output language: ")
@@ -94,7 +80,17 @@ with st.container( border=True):
                     """, unsafe_allow_html=True)
         output_placeholder.caption("Here will be displayed your subtitle video")
 
+if video_uploaded:
+    placeholder.video(video_uploaded)
+    with open("input.mp4", "wb") as f:
+        f.write(video_uploaded.getbuffer())
+    command = "ls /mount/src/lolacap/"
+    subprocess.run(command, shell=True)
 
+if st.session_state.youtube_url: 
+        print('AAAA, ', st.session_state.youtube_url)
+        placeholder.video(st.session_state.youtube_url);
+        doSub.download_youtube(st.session_state.youtube_url);
 
 # video_uploaded = st.file_uploader("Upload a video for obtaining subtitles in Yoruba or Fon", type=('MP4', 'MOV', 'M4A', 'AVI'), key="file_uploaded_video", on_change=onVideoChange)
 # if video_uploaded:
