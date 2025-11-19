@@ -62,4 +62,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**LolaCap** — Breaking language barriers, one subtitle at a time.
+**Lolacap** — Breaking language barriers, one subtitle at a time.
